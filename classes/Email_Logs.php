@@ -1,12 +1,18 @@
 <?php
+namespace NAVGU\Classes;
 
 //Exit if accessed directly.
 defined('ABSPATH') or exit;
 
-class NAVGU_Main {
+class Email_Logs {
 	
 	//Defined properties
-    protected static $instance = null; //A single instance of the class
+    protected static $instance;
+
+    /**
+     * @var NAVGU\Classes\Email_Logs\Admin_Menu
+     */
+    public $admin_menu = null;
     
     /**
      * Ensuring that only 1 instance of the class is loaded
@@ -40,16 +46,26 @@ class NAVGU_Main {
      */
 	public function __construct(string $version){
         $this->version = $version;
-        $this->include();
+        $this->_include();
+        $this->_instantiate();
     }
 
     /**
      * Method to include the files
      */
-    public function include(){
+    public function _include(){
 
         //Classes
-        //include_once NAVGU_DIR_PATH . 'classes/VEXEL_Product_Variation.php';
+        include_once NAVGU_DIR_PATH . 'classes/Admin_Menu.php';
+
+    }
+
+    /**
+     * Method to instantiate each classes
+     */
+    public function _instantiate(){
+
+        $this->admin_menu = new \NAVGU\Classes\Email_Logs\Admin_Menu;
 
     }
 
