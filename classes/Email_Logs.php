@@ -110,24 +110,11 @@ class Email_Logs {
                     //Get the all recipients meta
                     $_recipients = $this->get_meta($email->ID, 'all_recipients_email');
 
-                    //Check if there are any valid contents
-                    if( !empty($_recipients) ){
+                    //Loop through the recipients
+                    foreach($recipients as $recipient){
 
-                        //Normalize the index keys
-                        foreach($_recipients as $key => $_recipient){
-                            $_recipients[$key] = $key;
-                        }
-
-                        //Normalize indexes
-                        $_recipients = array_values($_recipients);
-
-                        //Loop through the recipients
-                        foreach($recipients as $recipient){
-
-                            //Begin searching
-                            return array_search($recipient, $_recipients) !== false && $email->post_title == $subject;
-
-                        }
+                        //Begin searching
+                        return array_search($recipient, $_recipients) !== false && $email->post_title == $subject;
 
                     }
 
@@ -159,6 +146,23 @@ class Email_Logs {
 
         //Get all the email logs
         return get_posts($args);
+
+    }
+
+    /**
+     * Method to encode an entity into a valid json string
+     * @param mixed $data the data entity to encode
+     */
+    public function json_encode($data = null){
+
+        //Quick check
+        if(is_null($data)){
+            return null;
+        }
+
+        //Begin encoding
+        $data = wp_json_encode($data);
+        return function_exists( 'wc_esc_json' ) ? wc_esc_json( $data ) : _wp_specialchars( $data, ENT_QUOTES, 'UTF-8', true );
 
     }
 

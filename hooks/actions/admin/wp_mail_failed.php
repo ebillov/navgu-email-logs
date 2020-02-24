@@ -5,6 +5,7 @@ defined('ABSPATH') or exit;
 
 /**
  * Action hook to get the failed mail message errors referenced at wp-includes/pluggable.php wp_mail() method
+ * @param WP_Error $error
  */
 add_action('wp_mail_failed', function($error){
 

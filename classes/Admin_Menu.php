@@ -13,6 +13,7 @@ class Admin_Menu extends Email_Logs {
      */
     public function __construct(){
         $this->_admin_menu();
+        $this->_action_hooks();
     }
 
     /**
@@ -39,6 +40,16 @@ class Admin_Menu extends Email_Logs {
      */
     public function _admin_page_template(){
         include_once NEL_DIR_PATH . 'templates/admin_page_template.php';
+    }
+
+    /**
+     * Method to initialize action hooks
+     */
+    public function _action_hooks(){
+
+        //Admin hooks
+        include_once NEL_DIR_PATH . 'hooks/actions/admin/current_screen.php';
+
     }
 
 }
