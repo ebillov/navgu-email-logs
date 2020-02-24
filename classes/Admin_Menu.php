@@ -38,7 +38,7 @@ class Admin_Menu extends Email_Logs {
      * Method to output the page template
      */
     public function _admin_page_template(){
-        include_once NAVGU_DIR_PATH . 'templates/admin_page_template.php';
+        include_once NEL_DIR_PATH . 'templates/admin_page_template.php';
     }
 
 }
