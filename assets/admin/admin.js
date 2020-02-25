@@ -12,20 +12,6 @@ jQuery(document).ready(function(){
         }
     );
 
-    /**
-        $data = [
-            'subject' => $log->post_title,
-            'content' => $log->post_content,
-            'recipients' => implode( ', ', $this->get_meta($log->ID, 'all_recipients_email') ),
-            'cc_email' => implode( ', ', $this->get_meta($log->ID, 'cc_email') ),
-            'bcc_email' => implode( ', ', $this->get_meta($log->ID, 'bcc_email') ),
-            'from_email' => $this->get_meta($log->ID, 'from_email'),
-            'from_name' => $this->get_meta($log->ID, 'from_name'),
-            'attachments' => implode( ', ', $this->get_meta($log->ID, 'attachments') ),
-            'mail_status' => $this->get_meta($log->ID, 'mail_status')
-        ];
-     */
-
     //For showing the email content modal
     jQuery('#email_content').on('shown.bs.modal', function(e){
 
@@ -82,7 +68,7 @@ jQuery(document).ready(function(){
 
         //Empty the html containers
         modal.find('#email_title').html('');
-        modal.find('#email_status').html('');
+        modal.find('#email_status').html('').removeAttr('style');
         modal.find('#email_details').html('');
         modal.find('#email_content').html('');
         modal.find('#email_attachments').html('');
