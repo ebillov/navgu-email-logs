@@ -31,13 +31,15 @@ $email_logs = $this->get_logs();
                     $data = [
                         'subject' => $log->post_title,
                         'content' => $log->post_content,
-                        'recipients' => implode( ', ', $this->get_meta($log->ID, 'all_recipients_email') ),
-                        'cc_email' => implode( ', ', $this->get_meta($log->ID, 'cc_email') ),
-                        'bcc_email' => implode( ', ', $this->get_meta($log->ID, 'bcc_email') ),
+                        'recipients' => (!empty($this->get_meta($log->ID, 'all_recipients_email'))) ? implode( ', ', $this->get_meta($log->ID, 'all_recipients_email') ) : '',
+                        'cc_email' => (!empty($this->get_meta($log->ID, 'cc_email'))) ? implode( ', ', $this->get_meta($log->ID, 'cc_email') ) : '',
+                        'bcc_email' => (!empty($this->get_meta($log->ID, 'bcc_email'))) ? implode( ', ', $this->get_meta($log->ID, 'bcc_email') ) : '',
                         'from_email' => $this->get_meta($log->ID, 'from_email'),
                         'from_name' => $this->get_meta($log->ID, 'from_name'),
-                        'attachments' => implode( ', ', $this->get_meta($log->ID, 'attachments') ),
-                        'mail_status' => ucfirst( $this->get_meta($log->ID, 'mail_status') )
+                        'attachments' => (!empty($this->get_meta($log->ID, 'attachments'))) ? implode( ', ', $this->get_meta($log->ID, 'attachments') ) : '',
+                        'error_codes' => (!empty($this->get_meta($log->ID, 'error_codes'))) ? implode( ', ', $this->get_meta($log->ID, 'error_codes') ) : '',
+                        'error_messages' => (!empty($this->get_meta($log->ID, 'error_messages'))) ? implode( ', ', $this->get_meta($log->ID, 'error_messages') ) : '',
+                        'mail_status' => ucfirst( $this->get_meta($log->ID, 'mail_status') ),
                     ];
 
                 ?>
@@ -86,14 +88,24 @@ $email_logs = $this->get_logs();
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="email_title">Modal title</h5>
-                <h6>Status: <span id="email_status"></span></h6>
+                <h5 class="modal-title"class="text_break">
+                    <span id="email_title" class="email_title"></span>
+                    <span class="email_status">Status: <span id="email_status"></span></span>
+                </h5>
             </div>
             <div class="modal-body">
-                <div id="email_details"></div>
+                <div id="email_details" class="text_break"></div>
+                <div id="email_attachments" class="text_break"></div>
+                <hr>
                 <h6>Email Content:</h6>
-                <div id="email_content"></div>
-                <div id="email_attachments"></div>
+                <div id="email_content" class="text_break"></div>
+                <div id="email_errors" class="hide_element">
+                    <hr>
+                    <h6>Error Codes</h6>
+                    <p id="error_codes"></p>
+                    <h6>Error Messages</h6>
+                    <p id="error_messages"></p>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

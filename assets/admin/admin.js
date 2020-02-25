@@ -27,10 +27,15 @@ jQuery(document).ready(function(){
         //Color the email status string
         switch(data.mail_status){
             case 'Failed':
-                modal.find('#email_status').css('color', '#F44336');
+                modal.find('#email_status').addClass('text-danger');
+
+                //Render details of error messages
+                modal.find('#email_errors').removeClass('hide_element').find('#error_codes').html(data.error_codes);
+                modal.find('#email_errors').removeClass('hide_element').find('#error_messages').html(data.error_codes);
+
                 break;
             case 'Sent':
-                modal.find('#email_status').css('color', '#4CAF50');
+                modal.find('#email_status').addClass('text-success');
                 break;
         }
 
@@ -68,7 +73,9 @@ jQuery(document).ready(function(){
 
         //Empty the html containers
         modal.find('#email_title').html('');
-        modal.find('#email_status').html('').removeAttr('style');
+        modal.find('#email_status').html('').removeClass('text-success').removeClass('text-danger');
+        modal.find('#email_errors').addClass('hide_element').find('#error_codes').html('');
+        modal.find('#email_errors').addClass('hide_element').find('#error_messages').html('');
         modal.find('#email_details').html('');
         modal.find('#email_content').html('');
         modal.find('#email_attachments').html('');

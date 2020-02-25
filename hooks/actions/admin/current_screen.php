@@ -36,6 +36,14 @@ add_action('current_screen', function($current_screen){
                 NEL()->version,
                 true
             );
+
+            //Our custom CSS
+            wp_enqueue_style(
+                'navgu-email-logs-admin',
+                NEL_DIR_URL . 'assets/admin/admin.css',
+                [],
+                NEL()->version
+            );
             
         });
         
