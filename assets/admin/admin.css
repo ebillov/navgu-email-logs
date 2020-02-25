@@ -14,3 +14,17 @@ span.email_status {
 span.email_status {
     font-size: 16px;
 }
+
+div.dataTables_length,
+div.subject_filter {
+    text-align: right;
+}
+
+@media (max-width: 767px){
+
+    div.dataTables_length,
+    div.subject_filter {
+        text-align: center;
+    }
+
+}

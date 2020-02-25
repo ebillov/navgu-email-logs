@@ -16,13 +16,13 @@ add_action('current_screen', function($current_screen){
 
             //Bootstrap
             wp_enqueue_script(
-                'bootstrap',
+                'navgu-email-logs-bootstrap',
                 NEL_DIR_URL . 'lib/bootstrap/js/bootstrap.min.js',
                 [],
                 '4.4.1'
             );
             wp_enqueue_style(
-                'bootstrap',
+                'navgu-email-logs-bootstrap',
                 NEL_DIR_URL . 'lib/bootstrap/css/bootstrap.min.css',
                 [],
                 '4.4.1'
@@ -40,6 +40,20 @@ add_action('current_screen', function($current_screen){
                 NEL_DIR_URL . 'lib/datatables/datatables.min.css',
                 [],
                 '1.10.20'
+            );
+
+            //Select2
+            wp_enqueue_script(
+                'navgu-email-logs-select2',
+                NEL_DIR_URL . 'lib/select2/dist/js/select2.min.js',
+                ['navgu-email-logs-datatables'],
+                '4.0.13'
+            );
+            wp_enqueue_style(
+                'navgu-email-logs-select2',
+                NEL_DIR_URL . 'lib/select2/dist/css/select2.min.css',
+                [],
+                '4.0.13'
             );
 
             //Our custom script

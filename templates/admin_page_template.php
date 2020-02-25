@@ -83,7 +83,6 @@ $email_logs = $this->get_logs();
 
 </div>
 
-
 <!-- Modal -->
 <div class="modal fade mt-3" id="email_content" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
@@ -114,3 +113,38 @@ $email_logs = $this->get_logs();
         </div>
     </div>
 </div>
+
+<?php if(!empty($email_logs)): ?>
+<!-- Select template -->
+<script id="subject_filter_template" type="text/template">
+    <select id="subject_filter" name="subjects[]" multiple="multiple">
+        <?php
+            $subject = [];
+            foreach($email_logs as $log):
+
+            //If the subject already exists, skip loop
+            if(in_array($log->post_title, $subject)){
+                continue;
+            }
+
+            //Replace any non alphanumeric characters
+            //$title = preg_replace('/[^a-z_\-0-9]/i', ' ', $log->post_title);
+            $title = $log->post_title;
+            $title = explode(' ', $title);
+
+            //Filter the array to not contain any empty items
+            $title = array_filter($title, function($value){
+                return (!empty($value)) ? true : false;
+            });
+
+            //Join to string
+            $title = implode('_', $title);
+
+            //Store the subject for later use in conditional above
+            $subject[] = $log->post_title;
+        ?>
+        <option value="<?php echo $title; ?>"><?php echo $log->post_title; ?></option>
+        <?php endforeach; ?>
+    </select>
+</script>
+<?php endif; ?>

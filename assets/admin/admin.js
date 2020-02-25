@@ -1,8 +1,55 @@
 jQuery(document).ready(function(){
 
     //Initialize the datatable
-    jQuery('#email_logs').DataTable(
+    var $email_logs = jQuery('#email_logs').DataTable(
         {
+            pageLength: 50, //Default page results
+            dom: 'l<"subject_filter">frtip',
+            initComplete: function(){
+
+                //Insert the select element
+                jQuery('div.subject_filter').html('<label>Filter by subject: ' + jQuery('#subject_filter_template').html());
+                
+                //Initialize the select2 library
+                jQuery('div.subject_filter').find('#subject_filter').select2(
+                    {
+                        placeholder: 'Select or type a subject (Optional)'
+                    }
+                );
+
+                //Attach event handler to select2 element
+                jQuery('div.subject_filter').find('#subject_filter').on('change.select2', function(){
+
+                    //Get the value
+                    var subjects = jQuery(this).val();
+
+                    //Quick check
+                    if(subjects != null && subjects.length > 0){
+
+                        //Loop through each values and modify content
+                        for(var i = 0; i < subjects.length; i++){
+
+                            //Regex escaping
+                            subjects[i] = jQuery.fn.dataTable.util.escapeRegex(
+                                subjects[i].split('_').join(' ') //Split to array
+                            );
+
+                        }
+
+                        //Joing to regex patter with separator
+                        subjects = subjects.join('|');
+
+                        //Begin search in 3rd column via regex
+                        $email_logs.column( 2 ).search(subjects, true, false).draw();
+
+                    } else {
+                        $email_logs.column( 2 ).search('').draw(); //Reset the table
+                    }
+
+                });
+
+            },
+            order: [[ 3, "desc" ]],
             responsive: true,
             columnDefs: [
                 { responsivePriority: 1, targets: 0 },
