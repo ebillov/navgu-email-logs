@@ -127,8 +127,7 @@ $email_logs = $this->get_logs();
                 continue;
             }
 
-            //Replace any non alphanumeric characters
-            //$title = preg_replace('/[^a-z_\-0-9]/i', ' ', $log->post_title);
+            //Explode to array
             $title = $log->post_title;
             $title = explode(' ', $title);
 
