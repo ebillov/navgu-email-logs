@@ -13,12 +13,15 @@ jQuery(document).ready(function(){
     );
 
     //For showing the email content modal
-    jQuery('#email_content').on('shown.bs.modal', function(e){
+    jQuery('#email_content').on('show.bs.modal', function(e){
 
         //Get the elements
         var button = jQuery(e.relatedTarget),
             data = button.data('email'),
             modal = jQuery(this);
+
+        //Change z-index property on left sidebar dashboard menu
+        jQuery('#adminmenuwrap').css('z-index', 1000);
 
         //Render to modal template
         modal.find('#email_title').html(data.subject);
@@ -70,6 +73,9 @@ jQuery(document).ready(function(){
         var button = jQuery(e.relatedTarget),
             data = button.data('email'),
             modal = jQuery(this);
+
+        //Remove z-index property
+        jQuery('#adminmenuwrap').removeAttr('style');
 
         //Empty the html containers
         modal.find('#email_title').html('');
