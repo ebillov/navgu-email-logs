@@ -85,7 +85,7 @@ $email_logs = $this->get_logs();
 
 
 <!-- Modal -->
-<div class="modal fade mt-5" id="email_content" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade mt-3" id="email_content" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
