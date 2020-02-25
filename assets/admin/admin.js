@@ -55,7 +55,7 @@ jQuery(document).ready(function(){
             modal.find('#email_details').append('<p><b>From Email: </b>' + data.from_email + '</p>');
         }
 
-        modal.find('#email_content').html( (data.is_html) ? data.content : data.content.replace(/\n/g, '<br>') );
+        modal.find('#email_content').html( (data.content_type == 'text/html') ? data.content : data.content.replace(/\n/g, '<br>') );
 
         if(data.attachments != ''){
             modal.find('#email_attachments').html('<p><b>Attachments: </b>' + data.attachments + '</p>');

@@ -40,7 +40,7 @@ $email_logs = $this->get_logs();
                         'error_codes' => (!empty($this->get_meta($log->ID, 'error_codes'))) ? implode( ', ', $this->get_meta($log->ID, 'error_codes') ) : '',
                         'error_messages' => (!empty($this->get_meta($log->ID, 'error_messages'))) ? implode( ', ', $this->get_meta($log->ID, 'error_messages') ) : '',
                         'mail_status' => ucfirst( $this->get_meta($log->ID, 'mail_status') ),
-                        'is_html' => $this->get_meta($log->ID, 'is_html'),
+                        'content_type' => $this->get_meta($log->ID, 'content_type'),
                     ];
 
                 ?>
