@@ -39,6 +39,7 @@ add_action('phpmailer_init', function($phpmailer){
         $this->set_meta($log_id, 'from_name', $phpmailer->FromName);
         $this->set_meta($log_id, 'attachments', $phpmailer->getAttachments());
         $this->set_meta($log_id, 'mail_status', 'sent');
+        $this->set_meta($log_id, 'is_html', ( ($phpmailer->isHTML() ) ? true : false ));
         
     }
 

@@ -14,6 +14,20 @@ add_action('current_screen', function($current_screen){
 
             wp_enqueue_script('jquery');
 
+            //Bootstrap
+            wp_enqueue_script(
+                'bootstrap',
+                NEL_DIR_URL . 'lib/bootstrap/js/bootstrap.min.js',
+                [],
+                '4.4.1'
+            );
+            wp_enqueue_style(
+                'bootstrap',
+                NEL_DIR_URL . 'lib/bootstrap/css/bootstrap.min.css',
+                [],
+                '4.4.1'
+            );
+
             //Datatables
             wp_enqueue_script(
                 'navgu-email-logs-datatables',
